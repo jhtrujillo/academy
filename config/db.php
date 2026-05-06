@@ -4,8 +4,8 @@
 
 define('DB_HOST', '127.0.0.1'); // En MAMP o Hostinger suele ser 'localhost' o '127.0.0.1'
 define('DB_NAME', 'academy_db');
-define('DB_USER', 'root');
-define('DB_PASS', 'root'); // MAMP usa 'root' como contraseña por defecto en macOS
+define('DB_USER', '');
+define('DB_PASS', ''); // MAMP usa 'root' como contraseña por defecto en macOS
 
 try {
     $pdo = new PDO(
@@ -19,6 +19,6 @@ try {
         ]
     );
 } catch (PDOException $e) {
-    // Evitamos mostrar detalles sensibles del servidor en producción
-    die("Error de conexión: No se pudo conectar a la base de datos.");
+    // Fallback gracioso para modo demostración si la base de datos no está activa
+    $pdo = null;
 }

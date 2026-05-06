@@ -42,14 +42,20 @@ $current_page = isset($_GET['page']) ? $_GET['page'] : 'dojo';
         </ul>
     </nav>
     
-    <div class="user-profile-widget">
-        <div class="avatar-wrapper">
-            <img src="/uploads/default-avatar.png" alt="Avatar" class="user-avatar" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=BlueReach'">
-            <span class="level-badge">1</span>
+    <div class="user-profile-widget" style="flex-direction: column; align-items: stretch; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="avatar-wrapper">
+                <img src="/uploads/default-avatar.png" alt="Avatar" class="user-avatar" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=<?php echo urlencode($_SESSION['usuario_nombre'] ?? 'User'); ?>'">
+                <span class="level-badge"><?php echo $_SESSION['usuario_nivel'] ?? 1; ?></span>
+            </div>
+            <div class="profile-info">
+                <span class="profile-name"><?php echo htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Estudiante'); ?></span>
+                <span class="profile-xp">Nivel <?php echo $_SESSION['usuario_nivel'] ?? 1; ?> • <?php echo $_SESSION['usuario_puntos'] ?? 0; ?> XP</span>
+            </div>
         </div>
-        <div class="profile-info">
-            <span class="profile-name">Blue Reach</span>
-            <span class="profile-xp">Nivel 1 • 5 XP</span>
-        </div>
+        <a href="/logout.php" class="action-link" style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #ef4444; border-top: 1px solid var(--border); padding-top: 10px; width: 100%;">
+            <i class="lucide-log-out" style="width: 14px; height: 14px;"></i>
+            <span>Cerrar Sesión</span>
+        </a>
     </div>
 </aside>
